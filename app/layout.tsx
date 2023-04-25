@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={font.className}>
         <ClientOnly>
-          <Modal />
+          <Modal title="Hello" isOpen />
         <Navbar />
         </ClientOnly>
         {children}
