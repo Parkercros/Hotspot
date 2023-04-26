@@ -31,7 +31,7 @@ const UserMenu = () => {
                 cursor-pointer  
                 "
         >
-          Airbnb your home
+          Hotspot your home
         </div>
         <div
           onClick={toggleOpen}
