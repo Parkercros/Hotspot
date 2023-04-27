@@ -6,20 +6,26 @@ import Modal from './components/modals/Modal';
 import RegisterModal from './components/modals/RegisterModal';
 import ToasterProvider from './providers/ToasterProvider';
 import LoginModal from './components/modals/LoginModal';
-
-
+import getCurrentUser from './actions/getCurrentUser';
 
 
 export const metadata = {
-  title: 'Airbnb',
-  description: 'Airbnb clone',
-};
+  title: 'HotSpot',
+  description: 'Hotspot',
+}
 
-const font = Nunito({
-  subsets: ["latin"],
+const font = Nunito({ 
+  subsets: ['latin'], 
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const currentUser = await getCurrentUser();
+
+
   return (
     <html lang="en">
       <head>
@@ -31,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ToasterProvider />
           <RegisterModal/>
           <LoginModal/>
-        <Navbar />
+          <Navbar currentUser={currentUser} />
         </ClientOnly>
         {children}
         </body>
