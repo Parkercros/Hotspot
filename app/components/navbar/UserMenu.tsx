@@ -7,6 +7,7 @@ import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
+import useRentModal from "@/app/hooks/useRentModal";
 
 interface UserMenuProps {
   currentUser?: User | null;
@@ -18,17 +19,25 @@ const UserMenu: React.FC<UserMenuProps> = ({
 }) => {
   const registerModal = useRegisterModal();
   const [isOpen, setIsOpen] = useState(false);
+  const rentModal= useRentModal();
   const loginModal = useLoginModal();
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
+  const onRent = useCallback(() => {
+if(!currentUser) {
+   return loginModal.onOpen();
+}
+rentModal.onOpen();
+  }, [currentUser, loginModal, rentModal]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={() => {}}
+          onClick={onRent}
           className="
                 hidden
                 md:block
@@ -60,6 +69,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 cursor-pointer
                 hover:shadow-md
                 transition
+
                 "
         >
           <AiOutlineMenu />
@@ -82,6 +92,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 right-0
                 top-12
                 text-sm
+                cursor-pointer  
                 "
         >
             <div className="flex flex-col cursor-pointer"></div>
@@ -104,7 +115,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             label="My Properties"
             />
             <MenuItem 
-            onClick={() => {}}
+            onClick={rentModal.onOpen}
             label="HotSpot My Home"
             />
             <hr />
