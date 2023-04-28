@@ -28,20 +28,18 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-      </head>
       <body className={font.className}>
         <ClientOnly>
           <ToasterProvider />
+          <LoginModal />
+          <RegisterModal />
           <RentModal />
-          <RegisterModal/>
-          <LoginModal/>
           <Navbar currentUser={currentUser} />
         </ClientOnly>
-        {children}
-        </body>
+        <div className="pb-20 pt-28">
+          {children}
+        </div>
+      </body>
     </html>
-  );
+  )
 }
