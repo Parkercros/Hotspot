@@ -1,23 +1,27 @@
-import ClientOnly from './components/ClientOnly';
-import Container from './components/Container';
-import EmptyState from './components/EmptyState';
+import Container from "@/app/components/Container";
 
-export default function Home() {
-  const isEmpty = true;
+import EmptyState from "@/app/components/EmptyState";
+import getListings from "@/app/actions/getListings";
+import ClientOnly from "./components/ClientOnly";
+import ListingCard from "./components/listings/ListingCard";
+import getCurrentUser from "./actions/getCurrentUser";
 
-  if (isEmpty) {
+export default async function Home() {
+  const listings = await getListings();
+  const currentUser = await getCurrentUser();
+
+  if (listings.length === 0) {
     return (
       <ClientOnly>
         <EmptyState showReset />
       </ClientOnly>
-    )
+    );
   }
 
   return (
     <ClientOnly>
-      <EmptyState />
       <Container>
-        <div
+        <div 
           className="
             pt-24
             grid 
@@ -30,9 +34,15 @@ export default function Home() {
             gap-8
           "
         >
-          <div>Listings</div>
+          {listings.map((listing: any) => (
+            <ListingCard
+            currentUser = {currentUser}
+            key = {listing.id}
+            data = {listing}
+            />
+          ))}
         </div>
       </Container>
     </ClientOnly>
-  );
+  )
 }
