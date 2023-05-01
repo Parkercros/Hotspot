@@ -11,19 +11,29 @@ interface CalendarProps{
     disabledDates?: Date[];
 }
 
-
-
 const Calender: React.FC<CalendarProps>  = ({
     value,
     onChange,
     disabledDates
 }) => {
-    return ( 
-        <DateRange
 
-
-        />
-     );
-}
+    return (
+        <div>
+          {value && (
+            <DateRange
+              rangeColors={['#262626']}
+              ranges={[value]}
+              date={new Date()}
+              onChange={onChange}
+              direction="vertical"
+              showDateDisplay={false}
+              minDate={new Date()}
+              disabledDates={disabledDates}
+            />
+          )}
+        </div>
+      );
+      
+  }
  
 export default Calender;
