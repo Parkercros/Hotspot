@@ -57,6 +57,7 @@ rentModal.onOpen();
         </div>
         <div
           onClick={toggleOpen}
+          onBlur={toggleOpen}
           className="
                 p-4
                 md:py-1
