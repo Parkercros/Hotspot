@@ -122,6 +122,10 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   label="Hotspot your home" 
                   onClick={rentModal.onOpen}
                 />
+                  <MenuItem 
+                  label="Messages" 
+                  onClick={() => router.push('/messages')}
+                />
                 <hr />
                 <MenuItem 
                   label="Logout" 

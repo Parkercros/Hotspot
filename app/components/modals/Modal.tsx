@@ -16,7 +16,15 @@ interface ModalProps {
   disabled?: boolean;
   secondaryAction?: () => void;
   secondaryActionLabel?: string;
+  textAreaProps?: {
+    value: string;
+    placeholder?: string;
+    maxLength?: number;
+    onKeyPress?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    onMessageChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  };
 }
+
 
 const Modal: React.FC<ModalProps> = ({ 
   isOpen, 

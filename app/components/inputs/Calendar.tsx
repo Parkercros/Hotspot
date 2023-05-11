@@ -30,6 +30,7 @@ const Calender: React.FC<CalendarProps>  = ({
               minDate={new Date()}
               disabledDates={disabledDates}
             />
+            
           )}
         </div>
       );

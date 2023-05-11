@@ -41,19 +41,25 @@ const RegisterModal= () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-
-    axios.post('/api/register', data)
-    .then(() => {
-      toast.success('Registered!');
-      registerModal.onClose();
-      loginModal.onOpen();
-    })
-    .catch((error) => {
-      toast.error(error);
-    })
-    .finally(() => {
+  
+    if (data.password !== data.confirmPassword) {
+      toast.error('Passwords do not match.');
       setIsLoading(false);
-    })
+      return;
+    }
+  
+    axios.post('/api/register', data)
+      .then(() => {
+        toast.success('Registered!');
+        registerModal.onClose();
+        loginModal.onOpen();
+      })
+      .catch((error) => {
+        toast.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
   const onToggle = useCallback(() => {
@@ -92,6 +98,15 @@ const RegisterModal= () => {
         errors={errors}
         required
       />
+<Input
+  id="confirmPassword"
+  label="Confirm Password"
+  type="password"
+  disabled={isLoading}
+  register={register}
+  errors={errors}
+  required
+/>
     </div>
   )
 
